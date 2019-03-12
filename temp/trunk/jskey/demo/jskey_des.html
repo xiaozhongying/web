@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui"/>
+<title>jskey_des</title>
+<script type="text/javascript" src="../../jskey/jskey_des.js"></script>
+<script type="text/javascript">
+function doDes(type, encid, decid){
+	var key = document.getElementById("key").value;
+	var e = document.getElementById(encid), d = document.getElementById(decid);
+	if(type){
+		d.value = $jskey.encodeDes(e.value, key);// 加密
+	}
+	else{
+		e.value = $jskey.decodeDes(d.value, key);// 解密
+	}
+}
+</script>
+<style type="text/css">
+	body {line-height:35px;}
+</style>
+</head>
+<body>
+<br /><br />
+<div style="margin:0 auto;text-align:center;">
+	密钥：<input type="text" id="key" style="width:200px;" value="test" />
+	<br />
+	明文：<input type="text" id="v1" style="width:250px;" value="我是明文" />
+	<input type="button" value="=&gt;加密=&gt;" onclick="doDes(true, 'v1', 'v2');" />
+	密文：<input type="text" id="v2" readonly="readonly" style="width:250px;" value="" />
+	<br />
+	密文：<input type="text" id="v4" style="width:250px;" value="112664A0739B43AC" />
+	<input type="button" value="=&gt;解密=&gt;" onclick="doDes(false, 'v3', 'v4');" />
+	明文：<input type="text" id="v3" readonly="readonly" style="width:250px;" value="" />
+</div>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+<title>自定义示例</title>
+<script type="text/javascript" src="/web/js/jskey/jskey_upload.js"></script>
+</head>
+<body style="font: 13px Verdana; background: #eee; color: #333">
+
+<h1>自定义示例</h1>
+
+<div id="filelist">你的浏览器不支持 Flash, Silverlight or HTML5</div>
+<br />
+
+<div id="container">
+    <a id="pickfiles" href="javascript:;">[选择文件]</a> 
+    <a id="uploadfiles" href="javascript:;">[上传文件 ]</a>
+</div>
+
+<br />
+<pre id="console"></pre>
+ 
+<script type="text/javascript">
+var ps = {
+	url : '/webio/io/upload.jsp?sessionkey=1&filekey=1&uploadone=false&ext=file',
+	runtimes : 'html5,flash,silverlight',
+	chunk_size : 0,
+	resize : { width : 320, height : 240, quality : 90 },
+	filters : {
+		max_file_size : '200mb',
+		mime_types: [
+			{title : "Image files", extensions : "jpg,gif,png"},
+			{title : "Zip files", extensions : "zip"}
+		]
+	},
+	preinit : {
+		Init: function(up, info) {
+			log('[Init]', '1... Info:', info, 'Features:', up.features);
+		},
+		UploadFile: function(up, file) {
+			log('[UploadFile]', file);
+			// You can override settings before the file is uploaded
+			// up.setOption('url', 'upload.php?id=' + file.id);
+			// up.setOption('multipart_params', {param1 : 'value1', param2 : 'value2'});
+		}
+	},
+	init : {
+		PostInit: function() {
+			//##filelist
+			document.getElementById('filelist').innerHTML = '';
+			
+			// Called after initialization is finished and internal event handlers bound
+			log('[PostInit]');
+			document.getElementById('uploadfiles').onclick = function() {
+				uploader.start();
+				return false;
+			};
+		},
+		Browse: function(up) {
+			// Called when file picker is clicked
+			log('[Browse]');
+		},
+		Refresh: function(up) {
+			// Called when the position or dimensions of the picker change
+			log('[Refresh]');
+		},
+		StateChanged: function(up) {
+			// Called when the state of the queue is changed
+			log('[StateChanged]', up.state == plupload.STARTED ? "STARTED" : "STOPPED");
+		},
+		QueueChanged: function(up) {
+			// Called when queue is changed by adding or removing files
+			log('[QueueChanged]');
+		},
+		OptionChanged: function(up, name, value, oldValue) {
+			// Called when one of the configuration options is changed
+			log('[OptionChanged]', 'Option Name: ', name, 'Value: ', value, 'Old Value: ', oldValue);
+		},
+		BeforeUpload: function(up, file) {
+			// Called right before the upload for a given file starts, can be used to cancel it if required
+			log('[BeforeUpload]', 'File: ', file);
+		},
+		UploadProgress: function(up, file) {
+			// Called while file is being uploaded
+			log('[UploadProgress]', 'File:', file, "Total:", up.total);
+			//##filelist
+			document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+		},
+		FileFiltered: function(up, file) {
+			// Called when file successfully files all the filters
+			log('[FileFiltered]', 'File:', file);
+		},
+		FilesAdded: function(up, files) {
+			// Called when files are added to queue
+			log('[FilesAdded]');
+			plupload.each(files, function(file) {
+				log('  File:', file);
+			});
+			//##filelist
+			plupload.each(files, function(file) {
+				document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+			});
+			//如果选完文件即时上传，则增加up.start();
+		},
+		FilesRemoved: function(up, files) {
+			// Called when files are removed from queue
+			log('[FilesRemoved]');
+			plupload.each(files, function(file) {
+				log('  File:', file);
+			});
+		},
+		FileUploaded: function(up, file, info) {
+			// Called when file has finished uploading
+			log('[FileUploaded] File:', file, "Info:", info);
+		},
+		ChunkUploaded: function(up, file, info) {
+			// Called when file chunk has finished uploading
+			log('[ChunkUploaded] File:', file, "Info:", info);
+		},
+		UploadComplete: function(up, files) {
+			// Called when all files are either uploaded or failed
+			log('[UploadComplete]');
+		},
+		Destroy: function(up) {
+			// Called when uploader is destroyed
+			log('[Destroy] ');
+		},
+		Error: function(up, args) {
+			// Called when error occurs
+			log('[Error] ', args);
+			alert("ERROR:" + args.file.name + "," + args.message);
+		}
+	}
+};
+
+
+function log() {
+	var str = "";
+	plupload.each(arguments, function(arg) {
+		var row = "";
+		if (typeof(arg) != "string") {
+			plupload.each(arg, function(value, key) {
+				if (arg instanceof plupload.File) {
+					switch (value) {
+						case plupload.QUEUED:value = 'QUEUED';break;
+						case plupload.UPLOADING:value = 'UPLOADING';break;
+						case plupload.FAILED:value = 'FAILED';break;
+						case plupload.DONE:value = 'DONE';break;
+					}
+				}
+				if (typeof(value) != "function") {
+					row += (row ? ', ' : '') + key + '=' + value;
+				}
+			});
+			str += row + " ";
+		} else {
+			str += arg + " ";
+		}
+	});
+	document.getElementById('console').innerHTML += str + "\n";
+}
+
+
+
+$jskey.upload.extend(ps);
+ps.browse_button = 'pickfiles';
+ps.container = document.getElementById('container');// ... or DOM Element itself
+
+var uploader = new plupload.Uploader(ps);
+uploader.init();
+
+</script>
+</body>
+</html>

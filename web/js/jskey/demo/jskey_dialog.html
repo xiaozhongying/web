@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui"/>
+<title>jskey_dialog</title>
+<style>
+	body {font-size:12px;}
+	input {cursor:pointer;}
+	div.title {color:#000000;font-size:30px;font-weight:bold;margin:10px auto;width:200px;text-align:center;}
+	div.box {border:#000000 3px solid;width:95%;padding:20px 20px;}
+	hr {}
+</style>
+<link rel="stylesheet" type="text/css" href="../../easyui//themes/default/easyui.css">
+<script type="text/javascript" src="../../jquery/jquery.js"></script>
+<script type="text/javascript" src="../../easyui/jquery.easyui.js"></script>
+<script type="text/javascript" src="../../jskey/jskey_core.js"></script>
+<script type="text/javascript">
+	$jskey.dialog.callback = function(){
+		alert('返回值是:' + ($jskey.dialog.returnValue.hello));
+	};
+	function mycallback(){
+		alert("这个是自定义函数喔！" + '返回值是:' + ($jskey.dialog.returnValue.hello));
+	};
+</script>
+</head>
+<body>
+
+<br /><br /><!--##########################################################################################-->
+
+<div class="box">
+	<div class="title">$jskey.dialog.showDialog</div>
+	
+	<br /><hr /><br />
+	<input type="button" value="对话框" onclick="$jskey.dialog.showDialog({title:'我的标题', url:'jskey_dialog_return.html',args:{v:1}});" /> 绝对路径<br />
+	<input type="button" value="对话框" onclick="$jskey.dialog.showDialog({callback:mycallback,title:'我的标题', url:'jskey_dialog_return.html',args:{v:1}});" /> 绝对路径（自定义函数）<br />
+	<br /><hr /><br />
+
+	<div class="title">window.showModalDialog</div>
+	
+	<br /><hr /><br />
+	<input type="button" value="我的对话框" onclick="$jskey.dialog.show({title:'我的标题', url:'http://www.baidu.com/',args:{v:1}});" /> 绝对路径<br />
+	<input type="button" value="我的返回值" onclick="alert($jskey.dialog.show({title:'我的百度', url:'jskey_dialog_return.html',args:{v:1}})  );" /> 相对路径<br />
+	<br /><hr /><br />
+
+	<div class="title">window.open</div>
+	
+	<br /><hr /><br />
+	<input type="button" value="我的窗口" onclick="$jskey.dialog.open({url:'http://www.baidu.com/'});" /> <br />
+	<br /><hr /><br />
+	<pre>
+		/**
+		 * 调用对象：$jskey.dialog
+		 */
+		/**************************************************************/
+		/*div对话框调用方法*/
+		/**************************************************************/
+		/**
+		 * 封装jquery.easyui的dialog(需要jquery和jquery.easyui支持)
+		 * 调用方法:$jskey.dialog.showDialog(args);
+		 * 封装jquery.easyui的dialog
+		 *   args：默认为{},内容为key:value
+		 * @key:
+		 * id 弹窗ID，页面多个弹窗时必要
+		 * title 窗口标题
+		 * url 网址
+		 * args 传递的参数(JS对象/页面对象)
+		 * width=number 宽度(单位px)
+		 * height=number 高度(单位px)
+		 * @return 子页面调用parent.$jskey.dialog.returnValue="anything";
+		 * 调用页取返回值:重载$jskey.dialog.callback = function(){alert($jskey.dialog.returnValue)};
+		 */
+		showDialog:function({})
+		
+		/**************************************************************/
+		/*模式对话框调用方法*/（firefox可能不再支持）
+		/**************************************************************/
+		/**
+		 * 弹出模式对话框<span style="color:#FF0000;">（不建议使用，用showDialog替代，使用方法一致）</span>
+		 * 调用方法:$jskey.dialog.show(args);
+		 *   args：默认为{},内容为key:value
+		 * @key:
+		 * title 窗口标题
+		 * url 需要访问的网址
+		 * args 传递的参数(JS对象/页面对象)
+		 * width=number 宽度(单位px)
+		 * height=number 高度(单位px)
+		 * reload 是否刷新父页面(true/false),默认false
+		 * status=(no,auto,yes) 是否显示状态栏
+		 * scroll=(auto,no,yes) 是否显示滚动条
+		 * resizable=(yes,no,auto) 是否可改变窗口大小
+		 * @return 子页面调用parent.$jskey.dialog.returnValue="anything";
+		 * 调用页取返回值:重载$jskey.dialog.callback = function(){alert($jskey.dialog.returnValue)};
+		 * 注意，窗口关闭后，在show方法返回之前，会调用$jskey.dialog.callback后再返回
+		 */
+		show({})
+		
+		/**************************************************************/
+		/*窗口调用方法*/
+		/**************************************************************/
+		/**
+		 * 打开窗口
+		 * 调用方法:$jskey.dialog.open(args);
+		 *   args：默认为{},内容为key:value
+		 * @key:
+		 * url 网址
+		 * target 打开的Window名称
+		 * width 宽度(单位px)
+		 * height 高度(单位px)
+		 * top=number 窗口离屏幕顶部距离(单位px)
+		 * left=number 窗口离屏幕左边距离(单位px)
+		 * status=(no/yes/0/1) 是否显示状态栏
+		 * scroll=(yes/no/1/0) 是否显示滚动条
+		 * resizable=(no/yes/0/1) 是否可改变窗口大小
+		 * menubar=(no/yes/0/1) 是否显示菜单
+		 * fullscreen=(no/yes/0/1) 是否全屏
+		 * toolbar=(no/yes/0/1) 是否显示工具条
+		 * location=(no/yes/0/1) 是否显示地址栏
+		 * directories =(no/yes/0/1) 是否显示转向按钮
+		 * channelmode=(no/yes/0/1) 是否显示频道栏
+		 * @return
+		 */
+		open:function({})
+		/**************************************************************/
+	</pre>
+</div>
+<br /><br /><!--##########################################################################################-->
+
+</body>
+</html>

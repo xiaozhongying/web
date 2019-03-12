@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui"/>
+<title>jskey_validator</title>
+<script type="text/javascript" src="../../jquery/jquery.js"></script>
+<script type="text/javascript" src="../../jskey/jskey_core.js"></script>
+<script type="text/javascript">
+function myfn(value)// value是表单中的值，只有这个参数
+{
+	return value == "good";
+}
+function check(type)
+{
+	if(type < 3)type = 3;
+	if(type > 4)type = 4;
+	if(type == 3.5)
+	{
+		if(!$jskey.validator.Validate("dataForm", 3, null, null, false))
+		{
+			return false;
+		}
+	}
+	else if(!$jskey.validator.Validate("dataForm", type, null, null))
+	{
+		return false;
+	}
+	alert("验证通过");
+}
+</script>
+<style type="text/css">
+td {text-align:left;}
+</style>
+</head>
+<body>
+<center>
+<input type="button" value="验证模式三" onclick="check(3);" />&nbsp;
+<input type="button" value="验证模式三(默认隐藏显示)" onclick="check(3.5);" />&nbsp;
+<input type="button" value="验证模式四" onclick="check(4);" />
+<br />
+需要可以为空的，验证类型名称前增加&quot;!&quot;，如：datatype=&quot;!Char&quot;
+<br />
+需要修改显示信息的，增加msg和alertMsg属性即可自定义提示信息
+<br />
+<div id="dataForm">
+<table border="0" cellspacing="1" cellpadding="0" class="listTable" style="width:800px;">
+	<tr>
+		<td style="width:30%;">作用</td>
+		<td style="width:70%;">示例</td>
+	</tr>
+	<tr>
+		<td>英文字母、数字、下划线</td>
+		<td><input type="text" name="TestChar" datatype="Char" value="" onfocus="$jskey.$('mv').innerHTML='我是旧的onfocus';" onblur="$jskey.$('mv').innerHTML='我是旧的onblur';" /><span id="mv"></span></td>
+	</tr>
+	<tr>
+		<td>英文字母、数字、下划线</td>
+		<td><input type="text" name="TestChar2" datatype="!Char" value="" msg="允许英文字母、数字、下划线，我是可以为空的喔" /></td>
+	</tr>
+	<tr>
+		<td>中文</td>
+		<td><input type="text" name="TestChinese" datatype="Chinese" value="" /></td>
+	</tr>
+	<tr>
+		<td>Email</td>
+		<td><input type="text" name="TestEmail" datatype="Email" value="" /></td>
+	</tr>
+	<tr>
+		<td>身份证号码</td>
+		<td><input type="text" name="TestIdCard" datatype="IdCard" value="" /></td>
+	</tr>
+	<tr>
+		<td>中国&港澳台(字母大写)</td>
+		<td><input type="text" name="TestUserCard" datatype="UserCard" value="" /></td>
+	</tr>
+	<tr>
+		<td>统一社会信用代码(企业)</td>
+		<td><input type="text" name="TestUnitCode" datatype="UnitCode" value="" /></td>
+	</tr>
+	<tr>
+		<td>组织机构代码(企业)</td>
+		<td><input type="text" name="TestOrgCode" datatype="OrgCode" value="" /></td>
+	</tr>
+	<tr>
+		<td>手机号码(纯数字)</td>
+		<td><input type="text" name="TestMobile" datatype="Mobile" value="" /></td>
+	</tr>
+	<tr>
+		<td>金额</td>
+		<td><input type="text" name="TestMoney" datatype="Money" value="" /></td>
+	</tr>
+	<tr>
+		<td>数字</td>
+		<td><input type="text" name="TestNumeral" datatype="Numeral" value="" /></td>
+	</tr>
+	<tr>
+		<td>电话号码</td>
+		<td><input type="text" name="TestPhone" datatype="Phone" value="" /></td>
+	</tr>
+	<tr>
+		<td>必填</td>
+		<td><input type="text" name="TestRequire" datatype="Require" value="" /></td>
+	</tr>
+	<tr>
+		<td>必填(无空格)</td>
+		<td><input type="text" name="TestRequireCompact" datatype="RequireCompact" value="" /></td>
+	</tr>
+	<tr>
+		<td>前后不能有空格</td>
+		<td><input type="text" name="TestRequireTrim" datatype="RequireTrim" value="" /></td>
+	</tr>
+	<tr>
+		<td>Url</td>
+		<td><input type="text" name="TestUrl" datatype="Url" value="" /></td>
+	</tr>
+	<tr>
+		<td>邮政编码</td>
+		<td><input type="text" name="TestZip" datatype="Zip" value="" /></td>
+	</tr>
+	<tr>
+		<td>数值</td>
+		<td><input type="text" name="TestNumber" datatype="Number" value="" /></td>
+	</tr>
+	<tr>
+		<td>正数</td>
+		<td><input type="text" name="TestNumberPlus" datatype="NumberPlus" value="" /></td>
+	</tr>
+	<tr>
+		<td>负数</td>
+		<td><input type="text" name="TestNumberMinus" datatype="NumberMinus" value="" /></td>
+	</tr>
+	<tr>
+		<td>整数</td>
+		<td><input type="text" name="TestInteger" datatype="Integer" value="" /></td>
+	</tr>
+	<tr>
+		<td>正整数</td>
+		<td><input type="text" name="TestIntegerPlus" datatype="IntegerPlus" value="" /></td>
+	</tr>
+	<tr>
+		<td>负整数</td>
+		<td><input type="text" name="TestIntegerMinus" datatype="IntegerMinus" value="" /></td>
+	</tr>
+	<tr>
+		<td>日期比较</td>
+		<td>
+		开始：<input type="text" id="DateCheckToAbc" name="TestDateCheckTo" value="" /><br />
+		结束：<input type="text" name="TestDateCheck" datatype="DateCheck" operator=">=" to="DateCheckToAbc" value="" />
+		</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>默认(&gt;=) (==) (!=) (&gt;) (&gt;=) (&lt;) (&lt;=)</td>
+	</tr>
+	<tr>
+		<td>文件名</td>
+		<td><input type="text" name="TestFilename" datatype="Filename" value="" /></td>
+	</tr>
+	<tr>
+		<td>所在省份：</td>
+		<td>
+			广东<input name="Province" value="1" type="radio" />
+			陕西<input name="Province" value="2" type="radio" />
+			浙江<input name="Province" value="3" type="radio" />
+			江西<input name="Province" value="4" type="radio" datatype="Group"  msg="必须选定一个省份" />
+		</td>
+	</tr>
+	<tr>
+		<td>爱好：</td>
+		<td>
+			运动<input name="Favorite" value="1" type="checkbox" />
+			上网<input name="Favorite" value="2" type="checkbox" />
+			音乐<input name="Favorite" value="3" type="checkbox" />
+			看书<input name="Favorite" value="4" type="checkbox" datatype="Group" min="2" max="3"  msg="必须选择2~3种爱好" />
+		</td>
+	</tr>
+	<tr>
+		<td>输入长度范围</td>
+		<td><input type="text" name="TestLimit" datatype="Limit" min="10" max="20" msg="长度10到20字" value="" /></td>
+	</tr>
+	<tr>
+		<td>输入长度范围（字符）</td>
+		<td><input type="text" name="TestLimitB" datatype="LimitB" min="10" max="20" msg="长度10到20字节" value="" /></td>
+	</tr>
+	<tr>
+		<td>重复</td>
+		<td>
+			密码：<input type="text" id="RepeatToAbc" name="TestRepeatTo" datatype="Password" value="" /><br />
+			重复：<input type="text" name="TestRepeat" datatype="Repeat" to="RepeatToAbc" value="" />
+		</td>
+	</tr>
+	<tr>
+		<td>限制大小</td>
+		<td><input type="text" name="TestRange" datatype="Range" max="20" msg="小于20，这是自定义的喔" value="" /></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><input type="text" name="TestRange2" datatype="Range" min="10" max="20" msg="数字10到20" alertMsg="数字10到20，这个是自定义的喔" value="" /></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>自定义函数:fn指定函数名，不需要括号和参数</td>
+	</tr>
+	<tr>
+		<td>自定义函数</td>
+		<td><input type="text" name="TestFuntion" datatype="Function" fn="myfn" value="" msg="请输入“good”" /></td>
+	</tr>
+</table>
+</div>
+</center>
+</body>
+<script type="text/javascript">
+//$jskey.validator.Init("dataForm", 3, null, null, true);//一开始就要即时验证的话，调用此方法(默认离开显示提示内容)
+//$jskey.validator.Init("dataForm", 3, null, null, false);//一开始就要即时验证的话，调用此方法(默认离开隐藏提示内容)
+</script>
+</html>

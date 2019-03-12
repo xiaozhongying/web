@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui"/>
+<title>jskey_form</title>
+<style>
+	body {font-size:12px;}
+	input {cursor:pointer;}
+	div.title {color:#000000;font-size:30px;font-weight:bold;margin:10px auto;width:200px;text-align:center;}
+	div.box {border:#000000 3px solid;width:95%;padding:20px 20px;}
+	hr {}
+</style>
+<script type="text/javascript" src="../../jskey/jskey_core.js"></script>
+<script type="text/javascript">
+function arrToString(_arr)
+{
+	var _t = "[{id:\"" + _arr[0].id + "\",value:\"" + _arr[0].value + "\"}";
+	for(var i = 1;i < _arr.length;i++)
+	{
+		_t += ",{id:\"" + _arr[i].id + "\",value:\"" + _arr[i].value + "\"}";
+	}
+	_t += "]";
+	return _t;
+}
+function objToString(_obj)
+{
+	if(_obj == null) return null;
+	return "{id:\"" + _obj.id + "\",value:\"" + _obj.value + "\"}";
+}
+</script>
+</head>
+<body>
+
+<br /><br /><!--##########################################################################################-->
+
+<div class="box">
+	<div class="title">checkbox</div>
+	
+	<br /><hr /><br />
+	
+	<input id="c_id_1" name="c_name" type="checkbox" value="v1" /><label for="c1">1</label>
+	<input id="c_id_2" name="c_name" type="checkbox" value="v2" /><label for="c2">2</label>
+	<input id="c_id_3" name="c_name" type="checkbox" value="v3" /><label for="c3">3</label>
+	<input id="c_id_4" name="c_name" type="checkbox" value="v4" /><label for="c4">4</label>
+	<input id="c_id_5" name="c_name" type="checkbox" value="v5" /><label for="c5">5</label>
+	<input id="c_id_6" name="c_name" type="checkbox" value="v6" /><label for="c6">6</label>
+	<input id="c_id_7" name="c_name" type="checkbox" value="v7" /><label for="c7">7</label>
+	<input id="c_id_8" name="c_name" type="checkbox" value="v8" /><label for="c8">8</label>
+	<input id="c_id_9" name="c_name" type="checkbox" value="v9" /><label for="c9">9</label>
+	<input id="c_id_0" name="c_name" type="checkbox" value="v0" /><label for="c0">0</label>
+	<br />
+	<input type="button" value="被选中的个数" onclick="alert($jskey.checkbox.countSelected('c_name'));" /> countSelected(name)<br />
+	<input type="button" value="被选中的选项数组信息[{id,value}]" onclick="alert(arrToString($jskey.checkbox.getSelected('c_name', '至少选中一项')));" /> getSelected(name, showMessage)<br />
+	<input type="button" value="以separator分隔被选中选项的值" onclick="alert($jskey.checkbox.getSelectedBySeparator('c_name', ','));" /> getSelectedBySeparator(name, separator)<br />
+	<input type="button" value="以separator分隔被选中选项的ID" onclick="alert($jskey.checkbox.getSelectedIdBySeparator('c_name', ','));" /> getSelectedIdBySeparator(name, separator)<br />
+	<input type="button" value="被选中的选项信息{id,value}" onclick="alert($jskey.checkbox.getSingleSelected('c_name', '只能选中一项'));" /> getSingleSelected(name, showMessage)<br />
+	<input type="button" value="是否有选中一项" onclick="alert($jskey.checkbox.isSelected('c_name'));" /> isSelected(name)<br />
+	<input type="button" value="反选" onclick="$jskey.checkbox.reselect('c_name', null);" /> reselect(name, null)<br />
+	<input type="checkbox" onclick="$jskey.checkbox.reselect('c_name', this.checked);" />重选目标 reselect(name, isChecked)
+
+	<br /><hr /><br />
+
+	<pre>
+		/**
+		 * 调用对象：$jskey.checkbox
+		 */
+		
+		/**************************************************************/
+		/*调用方法*/
+		/**************************************************************/
+		
+		/**
+		 * 返回指定复选框组被选中的个数,没有选中则返回0
+		 * name:复选框组名
+		 */
+		countSelected(name)
+		
+		/**
+		 * 返回指定复选框组被选中的选项数组信息Array=[{id:"",value:""},...](必须有ID属性,可多单选),没有选中则返回空数组并提示信息
+		 * name:复选框组名
+		 * showMessage:没有选中时的提示信息(为空则不提示)
+		 */
+		getSelected(name, showMessage)
+		
+		/**
+		 * 返回指定复选框组被选中值,并以separator分隔开,没有选中则返回""
+		 * name:复选框组名
+		 * separator:分隔符
+		 */
+		getSelectedBySeparator(name, separator)
+		
+		/**
+		 * 返回指定复选框组被选中选项的ID(必须有ID属性),并以separator分隔开
+		 * name:复选框组名
+		 * separator:分隔符
+		 */
+		getSelectedIdBySeparator(name, separator)
+		
+		/**
+		 * 返回指定复选框组被选中的选项信息{id:"",value:""}(必须有ID属性,仅单选),没有选中则返回null
+		 * name:复选框组名
+		 * showMessage:没有选中或非单选时的提示信息(为空则不提示)
+		 */
+		getSingleSelected(name, showMessage)
+		
+		/**
+		 * 判断是否有选中至少一个选项
+		 * name:复选框组名
+		 */
+		isSelected(name)
+		
+		/**
+		 * 根据指定的状态重选目标复选框组
+		 * name:复选框组名
+		 * isChecked:状态,全选[true/false]/反选[null]
+		 */
+		reselect(name, isChecked)
+		/**************************************************************/
+	</pre>
+</div>
+
+<br /><br /><!--##########################################################################################-->
+
+<div class="box">
+	<div class="title">radio</div>
+	
+	<br /><hr /><br />
+	
+	<input id="r_id_1" name="r_name" type="radio" value="v1" /><label for="r1">1</label>
+	<input id="r_id_2" name="r_name" type="radio" value="v2" /><label for="r2">2</label>
+	<input id="r_id_3" name="r_name" type="radio" value="v3" /><label for="r3">3</label>
+	<input id="r_id_4" name="r_name" type="radio" value="v4" /><label for="r4">4</label>
+	<input id="r_id_5" name="r_name" type="radio" value="v5" /><label for="r5">5</label>
+	<input id="r_id_6" name="r_name" type="radio" value="v6" /><label for="r6">6</label>
+	<input id="r_id_7" name="r_name" type="radio" value="v7" /><label for="r7">7</label>
+	<input id="r_id_8" name="r_name" type="radio" value="v8" /><label for="r8">8</label>
+	<input id="r_id_9" name="r_name" type="radio" value="v9" /><label for="r9">9</label>
+	<input id="r_id_0" name="r_name" type="radio" value="v0" /><label for="r0">0</label>
+	<br />
+	<input type="button" value="被选中的选项信息{id,value}" onclick="alert(objToString($jskey.radio.getSelected('r_name', '请选择')));" /> getSelected(name, showMessage)<br />
+	<input type="button" value="被选中选项的ID" onclick="alert($jskey.radio.getId('r_name', '请选择'));" /> getId(name, '请选择')<br />
+	<input type="button" value="被选中选项的值" onclick="alert($jskey.radio.getValue('r_name', '请选择'));" /> getValue(name, '请选择')<br /><br />
+	<input id="doCheckID" type="checkbox" /><label for="doCheckID">是否不可选</label> 选中值：<input id="doCheckText" type="text" style="width:50px;" value="v5" title="请输入您需要选中的默认值" /><br />
+	<input type="button" value="选中指定值" onclick="alert($jskey.radio.reselect('r_name', document.getElementById('doCheckText').value, document.getElementById('doCheckID').checked));" /> reselect:function(name, defaultValue, isDisabled)<br /><br />
+	<input type="button" value="还原" onclick="$jskey.radio.reselect('r_name', null, false);" /> reselect(name, null, false)<br />
+	<input type="button" value="清除" onclick="$jskey.radio.reset('r_name', null);" /> reset(name), reset(name, false), reset(name, true)<br />
+	
+	<br /><hr /><br />
+
+	<pre>
+		/**
+		 * 调用对象：$jskey.radio
+		 */
+		
+		/**************************************************************/
+		/*调用方法*/
+		/**************************************************************/
+		
+		/**
+		 * 返回指定单选框组被选中的选项信息{id:"",value:""}(必须有ID属性),没有选中则返回null
+		 * name:单选框组名
+		 * showMessage:没有选中时的提示信息(为空则不提示)
+		 */
+		getSelected:function(name, showMessage)
+		
+		/**
+		 * 根据单选框组名取得选中的ID,没有选中则返回defaultValue
+		 * name:单选框组名
+		 */
+		getId:function(name, defaultValue)
+		
+		/**
+		 * 根据单选框组名取得选中的值,没有选中则返回defaultValue
+		 * name:单选框组名
+		 */
+		getValue:function(name, defaultValue)
+		
+		/**
+		 * 根据单选框组名与指定值进行重选,如果存在该指定值则选中指定值,没有值被选中,默认选中第一项
+		 * name:单选框组名
+		 * defaultValue:指定值
+		 * isDisabled:是否使其它值为不可选状态
+		 */
+		reselect:function(name, defaultValue, isDisabled)
+		
+		/**
+		 * 重置单选框组
+		 * name:单选框组名
+		 * isDisabled:是否使其它值为不可选状态
+		 */
+		reset:function(name, isDisabled)
+		/**************************************************************/
+	</pre>
+</div>
+
+<br /><br /><!--##########################################################################################-->
+
+<div class="box">
+	<div class="title">select</div>
+	
+	<br /><hr /><br />
+	
+	<table style="width:500px;">
+		<tr>
+			<td>
+				A1<br/>
+				<select id="s_id_a1" multiple="multiple" size="15" style="height:200px;width:200px;">
+					<option value="a1">选项A1</option>
+					<option value="a2">选项A2</option>
+					<option value="a3">选项A3</option>
+					<option value="a4">选项A4</option>
+					<option value="a5">选项A5</option>
+					<option value="a6">选项A6</option>
+					<option value="a7">选项A7</option>
+					<option value="a8">选项A8</option>
+					<option value="a9">选项A9</option>
+					<option value="a0">选项A0</option>
+				</select>
+			</td>
+			<td>
+				A2<br/>
+				<select id="s_id_a2" multiple="multiple" size="15" style="height:200px;width:200px;">
+				</select>
+			</td>
+		</tr>
+	</table><br />
+	<input type="button" value="A1选中的复制到A2,不清空A2" onclick="$jskey.select.copy('s_id_a1', 's_id_a2', true, false);" /> copy(fromID, toID, isSelected, isClear)<br />
+	<input type="button" value="A1选中的复制到A2,先清空A2" onclick="$jskey.select.copy('s_id_a1', 's_id_a2', true, true);" /> copy(fromID, toID, isSelected, isClear)<br />
+	<input type="button" value="反选A1的选中项" onclick="$jskey.select.reselect('s_id_a1', null);" /> reselect(id, isChecked)<br />
+	<input type="button" value="全选A1的项" onclick="$jskey.select.reselect('s_id_a1', true);" /> reselect(id, isChecked)<br />
+	<input type="button" value="不选A1的项" onclick="$jskey.select.reselect('s_id_a1', false);" /> reselect(id, isChecked)<br />
+	
+	<br /><hr /><br />
+	
+	<table style="width:500px;">
+		<tr>
+		<td>
+			A3<br/>
+			<select id="s_id_a3" multiple="multiple" size="15" style="height:200px;width:200px;">
+				<option value="a1">选项A1</option>
+				<option value="a2">选项A2</option>
+				<option value="a3">选项A3</option>
+				<option value="a4">选项A4</option>
+				<option value="a5">选项A5</option>
+				<option value="a6">选项A6</option>
+				<option value="a7">选项A7</option>
+				<option value="a8">选项A8</option>
+				<option value="a9">选项A9</option>
+				<option value="a0">选项A0</option>
+			</select>
+		</td>
+		<td>
+			A4<br/>
+			<select id="s_id_a4" multiple="multiple" size="15" style="height:200px;width:200px;">
+			</select>
+		</td>
+		</tr>
+	</table><br />
+	<input type="button" value="A3选中的移到A4,并移除" onclick="$jskey.select.swap('s_id_a3', 's_id_a4', true);" /> swap(fromID, toID, isSelected)<br />
+	<input type="button" value="A4全部的移到A3,并移除" onclick="$jskey.select.swap('s_id_a4', 's_id_a3', false);" /> swap(fromID, toID, isSelected)<br />
+	<input type="button" value="判断A4中是否存在&quot;a8(选项A8)&quot;" onclick="alert($jskey.select.exist('s_id_a4', 'a8')?&quot;存在&quot;:&quot;不存在&quot;);" /> exist(id, value)<br />
+	
+	<br /><hr /><br />
+	
+	<table style="width:500px;">
+		<tr>
+			<td>
+				A5<br/>
+				<select id="s_id_a5" multiple="multiple" size="15" style="height:200px;width:200px;">
+					<option value="a2">选项A2</option>
+					<option value="a6">选项A6</option>
+					<option value="a7">选项A7</option>
+					<option value="a8">选项A8</option>
+					<option value="a3">选项A3</option>
+					<option value="a0">选项A0</option>
+					<option value="a4">选项A4</option>
+					<option value="a5">选项A5</option>
+					<option value="a9">选项A9</option>
+					<option value="a1">选项A1</option>
+				</select>
+			</td>
+			<td>
+				<select id="moveCount">
+					<option value="1">1步</option>
+					<option value="2" selected="selected">2步</option>
+					<option value="3">3步</option>
+				</select><br />	
+				<input type="button" value="A5选中的移到顶" onclick="$jskey.select.move('s_id_a5', 0, true);" /><br />
+				<input type="button" value="A5选中的向上移N步" onclick="$jskey.select.move('s_id_a5', document.getElementById('moveCount').value, true);" /><br />
+				<input type="button" value="A5选中的向下移N步" onclick="$jskey.select.move('s_id_a5', document.getElementById('moveCount').value, false);" /><br />
+				<input type="button" value="A5选中的移到尾" onclick="$jskey.select.move('s_id_a5', 0, false);" /><br />
+				move(id, count, isWay)<br/>
+			</td>
+		</tr>
+	</table>
+	
+	<br /><hr /><br />
+	
+	<table style="width:500px;">
+		<tr>
+			<td>
+				A6<br/>
+				<select id="s_id_a6" multiple="multiple" size="15" style="height:200px;width:200px;">
+					<option value="a1">选项A1</option>
+					<option value="a2">选项A2</option>
+					<option value="a3">选项A3</option>
+					<option value="a4">选项A4</option>
+					<option value="a5">选项A5</option>
+					<option value="a6">选项A6</option>
+					<option value="a7">选项A7</option>
+					<option value="a8">选项A8</option>
+					<option value="a9">选项A9</option>
+					<option value="a0">选项A0</option>
+				</select>
+			</td>
+			<td>
+				value:<input id="myv" type="text" value="a3" /><br />
+				text :<input id="myt" type="text" value="选项A3" /><br />
+				<input type="button" value="判断存在再添加" onclick="if(!($jskey.select.exist('s_id_a6', document.getElementById('myv').value))){$jskey.select.add('s_id_a6', document.getElementById('myv').value, document.getElementById('myt').value);}else{alert('已经存在该值');}" /><br />
+				<input type="button" value="直接添加" onclick="$jskey.select.add('s_id_a6', document.getElementById('myv').value, document.getElementById('myt').value);" /><br />
+				<input type="button" value="删除选中" onclick="$jskey.select.remove('s_id_a6', true);" /><br />
+				exist(id, value)<br />
+				add(id, text, value)<br />
+				remove(id, isSelected)<br />
+			</td>
+		</tr>
+	</table>
+	
+	<br /><hr /><br />
+	
+	<pre>
+		/**
+		 * 调用对象：$jskey.select
+		 */
+		
+		/**************************************************************/
+		/*调用方法*/
+		/**************************************************************/
+		
+		/**
+		 * 判断相应的选项值是否在下拉框中存在
+		 * id:下拉框对象ID
+		 * optionValue:用于比较的值
+		 */
+		exist(id, value)
+
+		/**
+		 * 添加一个选项
+		 * id:下拉框对象ID
+		 * text:显示值
+		 * value:选项值
+		 */
+		add(id, text, value)
+
+		/**
+		 * 将来源下拉框中的选项,复制到目标下拉框
+		 * fromID:来源下拉框对象ID
+		 * toID:目标下拉框对象ID
+		 * isSelected:状态,添加选中项[true]/添加全部项[false]
+		 * isClear:复制前是否清空目标下拉框,清空[true]/保留[false]
+		 */
+		copy(fromID, toID, isSelected, isClear)
+
+		/**
+		 * 移动选中的选项
+		 * id:下拉框对象ID
+		 * count:数字,移动的长度(0则根据isWay移到最上/最下)
+		 * isWay:是否向上移(向上移[true],向下移[false])
+		 */
+		move(id, count, isWay)
+
+		/**
+		 * 移除选项
+		 * id:下拉框对象ID
+		 * isSelected:状态,移除选中项[true]/移除全部项[false]
+		 */
+		remove(id, isSelected)
+
+		/**
+		 * 根据指定的状态重选目标下拉框选项
+		 * selectObject:下拉框对象 取消选中相应列表中的全部项选中相应列表中的全部项
+		 * isChecked:状态,全选[true/false]/反选[null]
+		 */
+		reselect(id, isChecked)
+		/**************************************************************/
+	</pre>
+</div>
+
+<br /><br /><!--##########################################################################################-->
+
+</body>
+</html>

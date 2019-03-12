@@ -1,0 +1,12 @@
+.jskey-tooltip{padding:5px;font-size:12px;position:absolute;z-index:8999;}
+  .jskey-tooltip-inner{padding:3px 5px;background-color:#f3f3f3;font-weight:bold;font-family:"Microsoft Yahei","Hiragino Sans GB","Helvetica Neue",Helvetica,tahoma,arial,Verdana,sans-serif,"\5B8B\4F53";color:#ff0000;text-align:center;white-space:nowrap;}
+  .jskey-tooltip-inner{border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+  .jskey-tooltip-arrow{position:absolute;background:url('jskey_tooltip.gif') no-repeat top left;width:9px;height:5px;}
+  .jskey-tooltip-n .jskey-tooltip-arrow{top:0;left:50%;margin-left:-4px;}
+    .jskey-tooltip-nw .jskey-tooltip-arrow{top:0;left:10px;}
+    .jskey-tooltip-ne .jskey-tooltip-arrow{top:0;right:10px;}
+  .jskey-tooltip-s .jskey-tooltip-arrow{bottom:0;left:50%;margin-left:-4px;background-position:bottom left;}
+    .jskey-tooltip-sw .jskey-tooltip-arrow{bottom:0;left:10px;background-position:bottom left;}
+    .jskey-tooltip-se .jskey-tooltip-arrow{bottom:0;right:10px;background-position:bottom left;}
+  .jskey-tooltip-e .jskey-tooltip-arrow{top:50%;margin-top:-4px;right:0;width:5px;height:9px;background-position:top right;}
+  .jskey-tooltip-w .jskey-tooltip-arrow{top:50%;margin-top:-4px;left:0;width:5px;height:9px;}

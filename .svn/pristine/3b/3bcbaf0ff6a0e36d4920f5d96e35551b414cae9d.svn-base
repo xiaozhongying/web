@@ -1,0 +1,41 @@
+/share 需要复制到开发项目中的内容，复制的位置看/share/说明.txt
+
+web项目需要的目录，都是静态资源，不需要动态环境支持，建议直接配置到nginx或iis中
+	/web/js
+	/web/themes
+	/web/index.html
+
+JavaWeb项目，可删掉的内容
+	无
+
+CSharpWeb项目，可删掉的内容
+	/.classpath
+	/.project
+	/.settings
+	/web/WEB-INF
+	
+CSharpWeb项目，使用IISExpress时，需要在applicationhost.config的sites节点中增加如下配置
+            <site name="web" id="2">
+                <application path="/" applicationPool="Clr4IntegratedAppPool">
+                    <virtualDirectory path="/" physicalPath="解决方案所在目录\web\web" />
+                </application>
+                <application path="/web" applicationPool="Clr4IntegratedAppPool">
+                    <virtualDirectory path="/" physicalPath="解决方案所在目录\web\web" />
+                </application>
+                <bindings>
+                    <binding protocol="http" bindingInformation="*:7070:localhost" />
+                </bindings>
+            </site>
+
+新增web/js/ztree/zTreeStyle/v/*下三个图片文件
+修改web/js/ztree/zTreeStyle/zTreeStyle.css文件，在最后面追加了以下样式代码
+	.ztree li span.button.groups_ico_open,
+	.ztree li span.button.groups_ico_close,
+	.ztree li span.button.groups_ico_docu{margin-right:2px; background: url(v/groups.png) no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle}
+	.ztree li span.button.group_ico_open,
+	.ztree li span.button.group_ico_close,
+	.ztree li span.button.group_ico_docu{margin-right:2px; background: url(v/group.png) no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle}
+	.ztree li span.button.user_ico_open,
+	.ztree li span.button.user_ico_close,
+	.ztree li span.button.user_ico_docu{margin-right:2px; background: url(v/user.png) no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle}
+

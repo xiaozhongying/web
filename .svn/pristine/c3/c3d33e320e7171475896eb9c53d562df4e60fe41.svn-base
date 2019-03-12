@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		body {font-size:12px;}
+		input {cursor:pointer;}
+		div.title {color:#000000;font-size:30px;font-weight:bold;margin:10px auto;width:100px;text-align:center;}
+		div.box {border:#000000 3px solid;width:50%;padding:20px 20px;margin:10px auto;}
+		hr {}
+	</style>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<script type="text/javascript">
+		parent.$jskey.dialog.returnValue = {hello:'不是关闭按钮的值喔'};
+		function getReturnValue()
+		{
+			try
+			{
+				var _v = parent.$jskey.dialog.dialogArguments.args.v;
+				if(_v == 1)
+				{
+					var myValue = {hello:"hello!!"};
+					//为父页面返回值，代码为：parent.reValue=anything;
+					parent.$jskey.dialog.returnValue = myValue;//返回调用窗口的值，可以是任意对象，(但如果是本页面的html对象，在关闭对话框后将取不到内容)
+				}
+				parent.$jskey.dialog.close();
+			}
+			catch(e)
+			{
+			}
+		}
+	</script>
+</head>
+<body>
+
+<br /><br /><!--##########################################################################################-->
+
+<div class="box">
+	<div class="title">
+		<input type="button" value="关闭" onclick="getReturnValue()" />
+	</div>
+</div>
+<br /><br /><!--##########################################################################################-->
+
+</body>
+</html>

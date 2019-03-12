@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui"/>
+<title>jskey_tooltip</title>
+
+<link rel="stylesheet" type="text/css" href="../../../../web/js/easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="../../../../web/themes/default/frame.css" />
+<script type="text/javascript" src="../../jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../web/js/easyui/jquery.easyui.js"></script>
+<script type="text/javascript" src="../../jskey/jskey_core.js"></script>
+<script type="text/javascript" src="../../jskey/jskey_tooltip.js"></script>
+<style type="text/css">td{padding:10px;}</style>
+<script type="text/javascript">
+function mymsg(){
+	return "这是由自定义的mymsg函数返回的喔，还可以搞ajax之类的";
+}
+$(function() {
+	$("#north-west").tipx({show: "nw"});
+	$("#north").tipx({show: "n"});
+	$("#north-east").tipx({show: "ne"});
+	
+	$("#east").tipx({show: "e"});
+	$("#west").tipx({show: "w"});
+	
+	$("#south-west").tipx({show: "sw"});
+	$("#south").tipx({show: "s"});
+	$("#south-east").tipx({show: "se"});
+    
+    
+    $("#xsouth-west").tipx({title:mymsg});
+    $("#xsouth").tipx();
+    $("#xeast-west").tipx();
+    $("#xeast-west2").tipx();
+    $("#xeast-west2").tipx("show");
+});
+</script>
+</head>
+<body class="easyui-layout treebody" fit="true">
+<div region="north" split="true" title="资源管理" style="height:30px;">
+	&nbsp;
+</div>
+<div region="west" split="true" title="资源管理" style="width:250px;">
+	&nbsp;
+</div>
+<div region="east" split="true" title="资源管理" style="width:250px;">
+	
+<table id="gravity" cellspacing="5" border="1" style="margin:0 auto;">
+	<tr>
+		<td>
+			<a id="north-west" href="#" title="西北方向提示">西北</a>
+		</td>
+		<td>
+			<a id="north" href="#" title="北方提示">北方</a>
+		</td>
+		<td>
+			<a id="north-east" href="#" title="东北方向提示">东北</a>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<a id="west" href="#" title="西方提示">西方</a>
+		</td>
+		<td>&nbsp;</td>
+		<td>
+			<a id="east" href="#" title="东方提示">东方</a>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<a id="south-west" href="#" title="西南方向提示">西南</a>
+		</td>
+		<td>
+			<a id="south" href="#" title="南方提示">南方</a>
+		</td>
+		<td>
+			<a id="south-east" href="#" title="东南方向<br /><input type='text' /> 提\n示">东南</a>
+		</td>
+	</tr>
+</table>
+<br /><br /><br /><br /><br /><br /><br /><br />
+<table id="xgravity" cellspacing="5" border="1" style="margin:0 auto;" width="100%" height="80%">
+	<tr>
+		<td>
+			<a id="xsouth-west" href="#" msg="自定义" title="默认东西位置适应，并调用函数">西南</a>
+		</td>
+		<td>
+			<a id="xsouth" href="#" msg="这个是msg属性的喔，这才是正统的" title="默认东西位置适应">南方</a>
+		</td>
+		<td id="ss">
+			<a id="xeast-west" href="#" title="默认东西位置适应">东西</a>
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			<a id="xeast-west2" href="#" title="默认东西位置适应">东西</a>
+		</td>
+	</tr>
+</table>
+</div>
+<div region="center" style="overflow:hidden;">
+	
+</div>
+</body>
+</html>

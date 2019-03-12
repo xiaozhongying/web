@@ -1,0 +1,13 @@
+渐变 {
+  background:-webkit-linear-gradient(top,#eff5ff 0,#e0ecff 100%);
+  background:-moz-linear-gradient(top,#eff5ff 0,#e0ecff 100%);
+  background:-o-linear-gradient(top,#eff5ff 0,#e0ecff 100%);
+  background:linear-gradient(to bottom,#eff5ff 0,#e0ecff 100%);
+  background-repeat:repeat-x;
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#eff5ff,endColorstr=#e0ecff,GradientType=0);
+}
+
+
+灰度 {
+	filter: gray;
+}
